@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="Theme">
+        <attr name="theme_auto" format="boolean" />  
+        <attr name="theme_drawable" format="integer" />    
+        <attr name="theme_color" format="integer" />     
+        <attr name="theme_shadowColor" format="integer" />    
+        <attr name="theme_hintColor" format="integer" />  
+        <attr name="theme_backgroundColor" format="integer" />    
+        <attr name="theme_backgroundDrawable" format="integer" />
+        <attr name="theme_alternativeBackgroundDrawable" format="integer" />       
+        <attr name="theme_divider" format="integer" />
+        <attr name="theme_listSelector" format="integer" />   
+    </declare-styleable>
+   
+</resources>
