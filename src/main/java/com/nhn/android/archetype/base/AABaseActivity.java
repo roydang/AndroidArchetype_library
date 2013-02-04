@@ -6,12 +6,12 @@
  */
 package com.nhn.android.archetype.base;
 
-import android.app.Activity;
+import roboguice.activity.RoboActivity;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 
-import com.nhn.android.archetype.base.BaseApplication.BaseApplicationListener;
+import com.nhn.android.archetype.base.AABaseApplication.BaseApplicationListener;
 import com.nhn.android.archetype.base.image.ImageHelper;
 import com.nhn.android.archetype.base.image.ImageLoadManager;
 import com.nhn.android.archetype.base.util.internal.M2baseLogger;
@@ -21,8 +21,8 @@ import com.nhn.android.archetype.base.util.internal.M2baseLogger;
  * @author telltale
  *
  */
-public class BaseActivity extends Activity implements BaseApplicationListener {
-	private static M2baseLogger logger = M2baseLogger.getLogger(BaseActivity.class);
+public class AABaseActivity extends RoboActivity implements BaseApplicationListener {
+	private static M2baseLogger logger = M2baseLogger.getLogger(AABaseActivity.class);
 	
 
 
@@ -30,7 +30,7 @@ public class BaseActivity extends Activity implements BaseApplicationListener {
 	protected void onCreate(Bundle savedInstanceState) {
 		logger.d("onCreate class(%s)", this.getClass().getName());
     	super.onCreate(savedInstanceState);
-    	BaseApplication.addActivity(this);
+    	AABaseApplication.addActivity(this);
 
 	}
 
@@ -38,7 +38,7 @@ public class BaseActivity extends Activity implements BaseApplicationListener {
 	protected void onDestroy() {
 		logger.d("onDestroy class(%s)", this.getClass().getName());
 		super.onDestroy();		
-		BaseApplication.removeActivity(this);
+		AABaseApplication.removeActivity(this);
 	}
 	
 	@Override
@@ -96,7 +96,7 @@ public class BaseActivity extends Activity implements BaseApplicationListener {
 	@Override
 	protected void onStop() {
 		logger.d("onStop class(%s)", this.getClass().getName());
-	
+		super.onStop();
 	}
 
 	@Override

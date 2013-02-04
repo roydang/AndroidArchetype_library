@@ -12,7 +12,7 @@ import java.util.List;
 import android.content.Context;
 import android.os.AsyncTask;
 
-import com.nhn.android.archetype.base.BaseApplication;
+import com.nhn.android.archetype.base.AABaseApplication;
 import com.nhn.android.archetype.base.cache.listener.FileCacheListener;
 import com.nhn.android.archetype.base.object.BaseObj;
 import com.nhn.android.archetype.base.util.internal.M2baseLogger;
@@ -35,7 +35,7 @@ public class FileCacheHelper {
 		OutputStream os = null;
 		
 		try {
-			Context context = BaseApplication._internalInstance;
+			Context context = AABaseApplication._internalInstance;
 			os = context.openFileOutput(fileName, Context.MODE_PRIVATE);
 			
 			os.write(raw.getBytes());
@@ -73,7 +73,7 @@ public class FileCacheHelper {
 	}
 
 	public static void putAsync(final String key, final BaseObj baseObj, final FileCacheListener listener) {
-		BaseApplication._internalInstance.getBackgroundHandler().post(new Runnable() {
+		AABaseApplication._internalInstance.getBackgroundHandler().post(new Runnable() {
 			@Override
 			public void run() {
 				String fileName = getCacheFileName(key);
@@ -89,7 +89,7 @@ public class FileCacheHelper {
 	}
 	
 	public static void putAsync(final String userId, final String key, final BaseObj baseObj, final FileCacheListener listener) {
-		BaseApplication._internalInstance.getBackgroundHandler().post(new Runnable() {
+		AABaseApplication._internalInstance.getBackgroundHandler().post(new Runnable() {
 			@Override
 			public void run() {
 				String fileName = getCacheFileName(userId, key);
@@ -105,7 +105,7 @@ public class FileCacheHelper {
 	}
 	
 	public static void putAsync(final String userId, final String url, final String json, final FileCacheListener listener) {
-		BaseApplication._internalInstance.getBackgroundHandler().post(new Runnable() {
+		AABaseApplication._internalInstance.getBackgroundHandler().post(new Runnable() {
 			@Override
 			public void run() {
 				String fileName = getCacheFileName(userId, url);
@@ -125,7 +125,7 @@ public class FileCacheHelper {
 			return;
 		}
 		
-		BaseApplication._internalInstance.getBackgroundHandler().post(new Runnable() {
+		AABaseApplication._internalInstance.getBackgroundHandler().post(new Runnable() {
 			@Override
 			public void run() {
 				SubclassUrlCacheGeneratorTask task = new SubclassUrlCacheGeneratorTask(userId, objList, urlPattern, keyList, listener);
@@ -147,7 +147,7 @@ public class FileCacheHelper {
 				return null;
 			}
 
-			Context context = BaseApplication._internalInstance;
+			Context context = AABaseApplication._internalInstance;
 			is = context.openFileInput(fileName);
 			
 			if (is != null) {
@@ -202,7 +202,7 @@ public class FileCacheHelper {
 	}
 	
 	public static void getAsync(final String key, final FileCacheListener listener) {
-		BaseApplication._internalInstance.getBackgroundHandler().post(new Runnable() {
+		AABaseApplication._internalInstance.getBackgroundHandler().post(new Runnable() {
 			@Override
 			public void run() {
 				String fileName = getCacheFileName(key);
@@ -210,7 +210,7 @@ public class FileCacheHelper {
 				File cache = getCacheFile(fileName);
 				if (!cache.exists()) {
 					if (listener != null) {
-						BaseApplication._internalInstance.getHandler().post(new Runnable() {
+						AABaseApplication._internalInstance.getHandler().post(new Runnable() {
 							@Override
 							public void run() {
 								listener.onError();
@@ -284,7 +284,7 @@ public class FileCacheHelper {
 	}
 	
 	public final static String getCacheFileName(String userId, String url) {
-		url = checkAndAppendParam(url, "locale", M2baseUtility.getSystemLocaleString(BaseApplication._internalInstance));
+		url = checkAndAppendParam(url, "locale", M2baseUtility.getSystemLocaleString(AABaseApplication._internalInstance));
 		int idx = url.indexOf("asig=");
 		
 		// asig값은 동적으로 변화하기 때문에 캐시로 사용할 수 없음.
@@ -307,7 +307,7 @@ public class FileCacheHelper {
 	}
 	
 	private static File getCacheFile(String fileName) {
-		Context context = BaseApplication._internalInstance;
+		Context context = AABaseApplication._internalInstance;
 		if (context != null) {
 			return context.getFileStreamPath(fileName);
 		}
@@ -395,9 +395,9 @@ public class FileCacheHelper {
 		@Override
 		protected Void doInBackground(Void... params) {
 			urlPattern = urlPattern.replace(URLEncoder.encode("%s"), "%s");
-			urlPattern = checkAndAppendParam(urlPattern, "locale", M2baseUtility.getSystemLocaleString(BaseApplication._internalInstance));
-			urlPattern = checkAndAppendParam(urlPattern, "akey", BaseApplication._internalInstance.getAppKey());
-			urlPattern = checkAndAppendParam(urlPattern, "asig", BaseApplication._internalInstance.getAppSig());
+			urlPattern = checkAndAppendParam(urlPattern, "locale", M2baseUtility.getSystemLocaleString(AABaseApplication._internalInstance));
+			urlPattern = checkAndAppendParam(urlPattern, "akey", AABaseApplication._internalInstance.getAppKey());
+			urlPattern = checkAndAppendParam(urlPattern, "asig", AABaseApplication._internalInstance.getAppSig());
 			
 			logger.d("urlPattern: %s", urlPattern);
 			

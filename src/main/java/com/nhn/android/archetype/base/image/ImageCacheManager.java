@@ -14,7 +14,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.support.v4.util.LruCache;
 
-import com.nhn.android.archetype.base.BaseApplication;
+import com.nhn.android.archetype.base.AABaseApplication;
 import com.nhn.android.archetype.base.theme.ThemeHelper;
 import com.nhn.android.archetype.base.util.internal.M2baseLogger;
 import com.nhn.android.archetype.base.util.internal.M2baseUtility;
@@ -43,7 +43,7 @@ public class ImageCacheManager {
 			return file;	
 		}
 		
-		file = new File(BaseApplication._internalInstance.getExternalCacheFolder(), M2baseUtility.format("%s/%s", name.charAt(name.length()-1), name));
+		file = new File(AABaseApplication._internalInstance.getExternalCacheFolder(), M2baseUtility.format("%s/%s", name.charAt(name.length()-1), name));
 		if (!file.getParentFile().exists()) {
 			file.getParentFile().mkdirs();
 		}

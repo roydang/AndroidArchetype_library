@@ -8,7 +8,7 @@ import java.util.Map.Entry;
 
 import android.os.AsyncTask;
 
-import com.nhn.android.archetype.base.BaseApplication;
+import com.nhn.android.archetype.base.AABaseApplication;
 import com.nhn.android.archetype.base.db.annotation.Column;
 import com.nhn.android.archetype.base.db.annotation.Table;
 import com.nhn.android.archetype.base.db.helper.M2SQLiteOpenHelper;
@@ -131,7 +131,7 @@ public class DBCacheManager {
 	}
 	
 	public void insert(final List<? extends BaseObj> objList, final String tag) {
-		BaseApplication._internalInstance.getBackgroundHandler().post(new Runnable() {
+		AABaseApplication._internalInstance.getBackgroundHandler().post(new Runnable() {
 			@Override
 			public void run() {
 				InsertTask task = new InsertTask(DBCacheManager.this, objList, tag);
@@ -163,7 +163,7 @@ public class DBCacheManager {
 	}
 	
 	public void select(final String whereCause, final DBCacheListener listener) {
-		BaseApplication._internalInstance.getBackgroundHandler().post(new Runnable() {
+		AABaseApplication._internalInstance.getBackgroundHandler().post(new Runnable() {
 			@Override
 			public void run() {
 				SelectTask task = new SelectTask(DBCacheManager.this, whereCause, listener);

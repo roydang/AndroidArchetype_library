@@ -36,9 +36,9 @@ import com.nhn.android.archetype.base.worker.ApacheJsonWorker;
 import com.nhn.android.archetype.base.worker.JsonWorker;
 import com.nhn.android.archetype.base.worker.Worker;
 
-public abstract class BaseApplication extends Application {
-	private static M2baseLogger logger = M2baseLogger.getLogger(BaseApplication.class);
-	public static BaseApplication _internalInstance; // M2base 내부에서만 사용할 인스턴스. 외부에선 접근하지 말것!
+public abstract class AABaseApplication extends Application {
+	private static M2baseLogger logger = M2baseLogger.getLogger(AABaseApplication.class);
+	public static AABaseApplication _internalInstance; // M2base 내부에서만 사용할 인스턴스. 외부에선 접근하지 말것!
 
 	public static interface BaseApplicationListener {
 		void finishForce();

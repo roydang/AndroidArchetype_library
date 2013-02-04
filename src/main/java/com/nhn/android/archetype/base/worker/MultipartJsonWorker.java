@@ -4,7 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.nhn.android.archetype.base.BaseApplication;
+import com.nhn.android.archetype.base.AABaseApplication;
 import com.nhn.android.archetype.base.object.BaseObj;
 
 public abstract class MultipartJsonWorker extends Worker {
@@ -13,7 +13,7 @@ public abstract class MultipartJsonWorker extends Worker {
 
 	private static final int DEFAULT_RETRY_COUNT = 3;
 
-	protected static BaseApplication application;
+	protected static AABaseApplication application;
 	protected static String globalAppKey;
 	protected static String globalAppSig;
 	protected static boolean enableSessionCache = false;
@@ -21,7 +21,7 @@ public abstract class MultipartJsonWorker extends Worker {
 	private int retrycount = DEFAULT_RETRY_COUNT;
 	
 	public static void init() {
-		MultipartJsonWorker.application = BaseApplication._internalInstance;
+		MultipartJsonWorker.application = AABaseApplication._internalInstance;
 		MultipartJsonWorker.globalAppKey = application.getAppKey();
 		MultipartJsonWorker.globalAppSig = application.getAppSig();
 	}

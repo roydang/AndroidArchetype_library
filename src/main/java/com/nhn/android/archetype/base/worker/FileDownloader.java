@@ -10,7 +10,7 @@ import java.net.URL;
 
 import android.os.AsyncTask;
 
-import com.nhn.android.archetype.base.BaseApplication;
+import com.nhn.android.archetype.base.AABaseApplication;
 import com.nhn.android.archetype.base.object.ApiResponse;
 import com.nhn.android.archetype.base.util.internal.M2baseLogger;
 import com.nhn.android.archetype.base.util.internal.M2baseUtility;
@@ -88,7 +88,7 @@ public class FileDownloader extends AsyncTask<Void, Void, File> {
 			
 			logger.d("execute: %sms", (System.currentTimeMillis() - startTime));
 			
-			File folder = BaseApplication._internalInstance.getExternalCacheFolder();
+			File folder = AABaseApplication._internalInstance.getExternalCacheFolder();
 			String fileName = String.format("tdn%s.tmp", System.currentTimeMillis());
 			
 			File tempFile = new File(folder, fileName);

@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.nhn.android.archetype.base.BaseApplication;
+import com.nhn.android.archetype.base.AABaseApplication;
 import com.nhn.android.archetype.base.util.internal.M2baseLogger;
 import com.nhn.android.archetype.base.util.internal.M2baseUtility;
 
@@ -32,14 +32,14 @@ public class ThemeHelper {
 	private static SoftReference<Map<Integer, Integer>> currentThemeIdMap;
 	
 	public final static boolean isThemeInstalled() {
-		return M2baseUtility.isNotNullOrEmpty(BaseApplication._internalInstance.getSelectedThemePackageName());
+		return M2baseUtility.isNotNullOrEmpty(AABaseApplication._internalInstance.getSelectedThemePackageName());
 	}
 	
 	public final static synchronized void updateTheme() {
 		currentThemeResources = null;
 		currentThemeIdMap = null;
 		
-		BaseApplication application = BaseApplication._internalInstance;
+		AABaseApplication application = AABaseApplication._internalInstance;
 		
 		try {
 			String themePackageName = application.getSelectedThemePackageName();
@@ -89,7 +89,7 @@ public class ThemeHelper {
 	}
 	
 	public final static List<String> getInstalledThemeListSync(String permission) {
-		BaseApplication application = BaseApplication._internalInstance;
+		AABaseApplication application = AABaseApplication._internalInstance;
 		
 		List<String> themeList = new ArrayList<String>();
 		PackageManager packageManager = application.getPackageManager();
@@ -111,7 +111,7 @@ public class ThemeHelper {
 	}
 	
 	public final static List<String> getInstalledThemeListSync(ThemePackageFilter filter) {
-		BaseApplication application = BaseApplication._internalInstance;
+		AABaseApplication application = AABaseApplication._internalInstance;
 		
 		List<String> themeList = new ArrayList<String>();
 		PackageManager packageManager = application.getPackageManager();
@@ -135,7 +135,7 @@ public class ThemeHelper {
 				return currentThemeResources.get();
 			}
 			
-			BaseApplication application = BaseApplication._internalInstance;
+			AABaseApplication application = AABaseApplication._internalInstance;
 			
 			try {
 				String themePackageName = application.getSelectedThemePackageName();
@@ -175,7 +175,7 @@ public class ThemeHelper {
 	}
 	
 	public final static int getThemeId(int id) {
-		BaseApplication application = BaseApplication._internalInstance;
+		AABaseApplication application = AABaseApplication._internalInstance;
 
 		if (isThemeInstalled()) {
 			try {
@@ -231,7 +231,7 @@ public class ThemeHelper {
 	}
 	
 	public final static Drawable getThemeDrawable(String name, boolean loadDefault) {
-		BaseApplication application = BaseApplication._internalInstance;
+		AABaseApplication application = AABaseApplication._internalInstance;
 
 		if (isThemeInstalled()) {
 			try {
@@ -262,7 +262,7 @@ public class ThemeHelper {
 	}
 	
 	public final static Drawable getThemeDrawable(int id, boolean loadDefault) {
-		BaseApplication application = BaseApplication._internalInstance;
+		AABaseApplication application = AABaseApplication._internalInstance;
 		
 		if (isThemeInstalled()) {
 			try {
@@ -291,7 +291,7 @@ public class ThemeHelper {
 	}
 	
 	public final static int getThemeColor(String name, boolean loadDefault) {
-		BaseApplication application = BaseApplication._internalInstance;
+		AABaseApplication application = AABaseApplication._internalInstance;
 
 		if (isThemeInstalled()) {
 			try {
@@ -321,7 +321,7 @@ public class ThemeHelper {
 	}
 	
 	public final static Integer getThemeColor(int id, boolean loadDefault) {
-		BaseApplication application = BaseApplication._internalInstance;
+		AABaseApplication application = AABaseApplication._internalInstance;
 
 		if (isThemeInstalled()) {
 			try {
@@ -503,7 +503,7 @@ public class ThemeHelper {
 	}
 	
 	public final static boolean isNhnOfficialTheme() {
-		BaseApplication application = BaseApplication._internalInstance;
+		AABaseApplication application = AABaseApplication._internalInstance;
 
 		String themePackageName = application.getSelectedThemePackageName();
 		String nhnSignaturePartial = "3082028e308201f";

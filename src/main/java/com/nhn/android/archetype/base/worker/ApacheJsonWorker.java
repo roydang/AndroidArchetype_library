@@ -48,7 +48,7 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.net.SSLCertificateSocketFactory;
 import android.net.SSLSessionCache;
 
-import com.nhn.android.archetype.base.BaseApplication;
+import com.nhn.android.archetype.base.AABaseApplication;
 import com.nhn.android.archetype.base.cache.FileCache;
 import com.nhn.android.archetype.base.cache.FileCacheHelper;
 import com.nhn.android.archetype.base.object.ApiResponse;
@@ -621,7 +621,7 @@ public class ApacheJsonWorker extends MultipartJsonWorker {
 						PreloadSubListJsonListener preloadSublistJsonListener = (PreloadSubListJsonListener) jsonListener;
 						BaseObj tempObj = BaseObj.parse(json, BaseObj.class);
 						
-						FileCacheHelper.putAsync(BaseApplication._internalInstance.getUserId(), preloadSublistJsonListener.getUrlPattern(), 
+						FileCacheHelper.putAsync(AABaseApplication._internalInstance.getUserId(), preloadSublistJsonListener.getUrlPattern(), 
 								(List<BaseObj>) tempObj.getList(preloadSublistJsonListener.getSublistKey(), BaseObj.class), 
 								preloadSublistJsonListener.getKeyList(), null);
 					}

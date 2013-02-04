@@ -8,7 +8,7 @@ package com.nhn.android.archetype.base.worker;
 
 import android.os.Handler;
 
-import com.nhn.android.archetype.base.BaseApplication;
+import com.nhn.android.archetype.base.AABaseApplication;
 import com.nhn.android.archetype.base.util.internal.M2baseLogger;
 
 /**
@@ -70,7 +70,7 @@ public abstract class Worker implements Runnable {
 	 * Main Thread로 메시지를 보낸다.
 	 */
 	public void doingWork() {
-		final Handler handler = BaseApplication._internalInstance.getHandler();
+		final Handler handler = AABaseApplication._internalInstance.getHandler();
 		if (working != null && handler != null) {
 			handler.post(working);
 		}
@@ -81,8 +81,8 @@ public abstract class Worker implements Runnable {
 	 * Main Thread로 메시지를 보낸다.
 	 */
 	public void endWork() {
-		if (BaseApplication._internalInstance != null) {
-			final Handler handler = BaseApplication._internalInstance.getHandler();
+		if (AABaseApplication._internalInstance != null) {
+			final Handler handler = AABaseApplication._internalInstance.getHandler();
 
 			if (workComplete != null && handler != null) {
 				currentRunner = new WorkComplete(this, workComplete);
@@ -147,15 +147,15 @@ public abstract class Worker implements Runnable {
 	 * ThreadPool에 작업을 등록한다.
 	 */
 	public void post() {
-		BaseApplication._internalInstance.addWorker(this);
+		AABaseApplication._internalInstance.addWorker(this);
 	}
 	
 	public void postStats() {
-		BaseApplication._internalInstance.addStatsWorker(this);
+		AABaseApplication._internalInstance.addStatsWorker(this);
 	}
 	
 	protected Handler getHandler() {
-		return BaseApplication._internalInstance.getHandler();
+		return AABaseApplication._internalInstance.getHandler();
 	}
 
 	/**

@@ -32,7 +32,7 @@ import android.os.AsyncTask;
 import android.os.Handler;
 import android.provider.MediaStore;
 
-import com.nhn.android.archetype.base.BaseApplication;
+import com.nhn.android.archetype.base.AABaseApplication;
 import com.nhn.android.archetype.base.image.listener.ImageLoadListener;
 import com.nhn.android.archetype.base.image.listener.ProgressiveImageLoadListener;
 import com.nhn.android.archetype.base.object.ApiResponse;
@@ -120,7 +120,7 @@ public class ImageHelper {
 			if (url.startsWith("http")) {
 				return url;
 			} else {
-				BaseApplication application = BaseApplication._internalInstance;
+				AABaseApplication application = AABaseApplication._internalInstance;
 				return M2baseUtility.format("http://%s/%s/%s", url, M2baseUtility.getVersionName(application), application.getSelectedThemePackageName());
 			}
 		}
@@ -156,10 +156,10 @@ public class ImageHelper {
 		}
 
 		final Bitmap image = getFromCache(url, maskData);
-		Handler handler = BaseApplication._internalInstance.getHandler();
+		Handler handler = AABaseApplication._internalInstance.getHandler();
 
 		if (image == null) {
-			Handler backgroundHandler = BaseApplication._internalInstance.getBackgroundHandler();
+			Handler backgroundHandler = AABaseApplication._internalInstance.getBackgroundHandler();
 			if (backgroundHandler != null) {
 				backgroundHandler.post(new Runnable() {
 					@Override
@@ -237,7 +237,7 @@ public class ImageHelper {
 		if (fileName.startsWith("/")) {
 			file = new File(fileName);
 		} else {
-			File sdCard = BaseApplication._internalInstance.getExternalImagesFolder();
+			File sdCard = AABaseApplication._internalInstance.getExternalImagesFolder();
 			file = new File(sdCard, fileName);
 		}
 
@@ -295,7 +295,7 @@ public class ImageHelper {
 			return null;
 		}
 
-		File sdCard = BaseApplication._internalInstance.getExternalImagesFolder();
+		File sdCard = AABaseApplication._internalInstance.getExternalImagesFolder();
 		File file = new File(sdCard, fileName);
 		if (file.exists()) {
 			boolean result = file.delete();
@@ -349,7 +349,7 @@ public class ImageHelper {
 			return null;
 		}
 
-		File sdCard = BaseApplication._internalInstance.getExternalImagesFolder();
+		File sdCard = AABaseApplication._internalInstance.getExternalImagesFolder();
 		File file = new File(sdCard, fileName);
 		if (file.exists()) {
 			boolean result = file.delete();

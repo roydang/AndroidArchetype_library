@@ -9,7 +9,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Locale;
 
-import com.nhn.android.archetype.base.BaseApplication;
+import com.nhn.android.archetype.base.AABaseApplication;
 
 import android.content.Context;
 import android.content.pm.PackageInfo;
@@ -127,7 +127,7 @@ public class M2baseUtility {
 
 	public final static Locale getSystemLocale(Context context) {
 		if (context == null) {
-			context = BaseApplication._internalInstance;
+			context = AABaseApplication._internalInstance;
 		}
 
 		if (context == null) {

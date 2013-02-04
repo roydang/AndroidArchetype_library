@@ -5,7 +5,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map.Entry;
 
-import com.nhn.android.archetype.base.BaseApplication;
+import com.nhn.android.archetype.base.AABaseApplication;
 import com.nhn.android.archetype.base.db.DBCacheManager.ColumnData;
 import com.nhn.android.archetype.base.db.annotation.Column;
 import com.nhn.android.archetype.base.db.annotation.Table;
@@ -27,7 +27,7 @@ public class M2SQLiteOpenHelper extends SQLiteOpenHelper {
 	//private SQLiteDatabase db;
 
 	public M2SQLiteOpenHelper(Class<? extends BaseObj> clazz, Table tableInfo, LinkedHashMap<String, ColumnData> columnList) {
-		super(BaseApplication._internalInstance, tableInfo.name(), null, tableInfo.version());
+		super(AABaseApplication._internalInstance, tableInfo.name(), null, tableInfo.version());
 
 		this.targetClass = clazz;
 		this.tableInfo = tableInfo;
