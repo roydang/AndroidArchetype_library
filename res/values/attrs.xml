@@ -13,7 +13,6 @@
         <attr name="theme_divider" format="integer" />
         <attr name="theme_listSelector" format="integer" />
     </declare-styleable>
-<<<<<<< HEAD
     <declare-styleable name="com_facebook_picker_fragment">
         <attr name="show_pictures" format="boolean" />
         <attr name="extra_fields" format="string" />
@@ -48,8 +47,6 @@
         </attr>
         <attr name="is_cropped" format="boolean" />
     </declare-styleable>
-
-=======
     <declare-styleable name="PullToRefresh">
 
         <!-- A drawable to use as the background of the Refreshable View -->
@@ -110,13 +107,13 @@
         <!--
         	Whether PullToRefreshListView has it's extras enabled. This allows the user to be 
         	able to scroll while refreshing, and behaves better. It acheives this by adding
-        	Header and/or Footer Views to the ListView.
+        	Header and/or Footer Views to the ListView.
         -->
         <attr name="ptrListViewExtrasEnabled" format="reference|boolean" />
 
         <!--
         	Whether the Drawable should be continually rotated as you pull. This only
-        	takes effect when using the 'Rotate' Animation Style.
+        	takes effect when using the 'Rotate' Animation Style.
         -->
         <attr name="ptrRotateDrawableWhilePulling" format="reference|boolean" />
 
@@ -124,6 +121,6 @@
         <attr name="ptrAdapterViewBackground" format="reference|color" />
         <attr name="ptrDrawableTop" format="reference" />
         <attr name="ptrDrawableBottom" format="reference" />
-    </declare-styleable>   
->>>>>>> 1f2a27e93b8818d01ca0fa64a664228c7e4c8b11
+    </declare-styleable>
+
 </resources>
