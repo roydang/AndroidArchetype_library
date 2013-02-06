@@ -25,8 +25,8 @@ import m2.android.archetype.example.FacebookSdk.internal.CacheableRequestBatch;
 import m2.android.archetype.example.FacebookSdk.model.GraphObject;
 import m2.android.archetype.example.FacebookSdk.model.GraphObjectList;
 import android.content.Context;
-import android.content.Loader;
 import android.os.Handler;
+import android.support.v4.content.Loader;
 
 class GraphObjectPagingLoader<T extends GraphObject> extends Loader<SimpleGraphObjectCursor<T>> {
     private final Class<T> graphObjectClass;
