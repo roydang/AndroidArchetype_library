@@ -11,7 +11,14 @@
     <properties>
         <platform.version>4.1.1.4</platform.version>
     </properties>
-
+ 	<repositories> 
+<!-- other repositories here --> 
+		<repository> 
+	      <id>bugsense repo</id> 
+	      <name>The BugSense Repository</name>	 
+	      <url>http://mvn.bugsense.com/</url> 
+	    </repository> 
+  	</repositories>
     <dependencies>
         <dependency>
             <groupId>com.google.android</groupId>
@@ -46,7 +53,13 @@
 		    <groupId>com.j256.ormlite</groupId>
 			<artifactId>ormlite-android</artifactId>
 			<version>4.42</version>		
-		</dependency>        
+		</dependency>   
+		<!-- bug sense -->
+		 <dependency>
+		      <groupId>com.bugsense.trace</groupId>
+		      <artifactId>bugsense</artifactId>
+		      <version>3.2</version>
+		  </dependency>
     </dependencies>
 
     <build>

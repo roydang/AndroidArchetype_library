@@ -56,7 +56,7 @@ import com.androidquery.AQuery;
 
 public class AQUtility {
 
-	private static boolean debug = false;
+	private static boolean debug = true;
 	private static Object wait;
 	
 	public static void setDebug(boolean debug){

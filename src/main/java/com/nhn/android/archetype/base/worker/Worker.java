@@ -148,11 +148,7 @@ public abstract class Worker implements Runnable {
 	 */
 	public void post() {
 		AABaseApplication._internalInstance.addWorker(this);
-	}
-	
-	public void postStats() {
-		AABaseApplication._internalInstance.addStatsWorker(this);
-	}
+	}	
 	
 	protected Handler getHandler() {
 		return AABaseApplication._internalInstance.getHandler();

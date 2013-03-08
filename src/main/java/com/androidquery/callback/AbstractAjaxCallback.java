@@ -1592,7 +1592,7 @@ public abstract class AbstractAjaxCallback<T, K> implements Runnable{
         
         AQUtility.debug("response", code);
         if(data != null){
-        	AQUtility.debug(data.length, url);
+        	AQUtility.debug(data.length, url);        	
         }
         
         status.code(code).message(message).error(error).redirect(redirect).time(new Date()).data(data).file(file).client(client).context(context).headers(response.getAllHeaders());

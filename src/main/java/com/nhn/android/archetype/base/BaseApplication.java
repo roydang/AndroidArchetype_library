@@ -7,6 +7,9 @@
 package com.nhn.android.archetype.base;
 
 import java.io.File;
+import java.lang.ref.WeakReference;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
@@ -14,17 +17,17 @@ import java.util.concurrent.TimeUnit;
 import org.apache.http.client.HttpClient;
 import org.apache.http.conn.ClientConnectionManager;
 
+import android.app.Activity;
+import android.app.ActivityManager;
+import android.app.ActivityManager.RunningServiceInfo;
 import android.app.Application;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Looper;
 
-import com.androidquery.callback.AjaxCallback;
-import com.androidquery.callback.BitmapAjaxCallback;
-import com.androidquery.util.AQUtility;
-import com.bugsense.trace.BugSenseHandler;
 import com.nhn.android.archetype.base.image.ImageCacheManager;
 import com.nhn.android.archetype.base.theme.ThemeHelper;
 import com.nhn.android.archetype.base.util.internal.M2baseLogger;
@@ -33,17 +36,11 @@ import com.nhn.android.archetype.base.worker.ApacheJsonWorker;
 import com.nhn.android.archetype.base.worker.JsonWorker;
 import com.nhn.android.archetype.base.worker.Worker;
 
-public abstract class AABaseApplication extends Application {
+public abstract class BaseApplication extends Application {
 	private static M2baseLogger logger = M2baseLogger.getLogger(BaseApplication.class);
-	public static AABaseApplication _internalInstance; // M2base 내부에서만 사용할 인스턴스. 외부에선 접근하지 말것!
+	public static BaseApplication _internalInstance; // M2base 내부에서만 사용할 인스턴스. 외부에선 접근하지 말것!
 
-	
-	private ExecutorService workExecutor;
-	private Handler handler;
-	private Handler backgroundHandler;
-	private HandlerThread backgroundHandlerThread;
-	
-	
+
 	@Override
 	public void onCreate() {
 		logger.d("onCreate");
@@ -61,8 +58,7 @@ public abstract class AABaseApplication extends Application {
 		
 		super.onCreate();
 		
-		initM2base();
-		initAquery();
+		init();
 	}
 
 	@Override
@@ -71,54 +67,15 @@ public abstract class AABaseApplication extends Application {
 		ImageCacheManager.clearMemoryCache();
 		super.onLowMemory();
 	}
-	protected void initAquery() {		
-		
-		AQUtility.setContext(this);
-		AQUtility.setCacheDir(null);
-        AjaxCallback.setNetworkLimit(8);
 
-        
-        BitmapAjaxCallback.setIconCacheLimit(200);
-        BitmapAjaxCallback.setCacheLimit(80);
-        BitmapAjaxCallback.setPixelLimit(400 * 400);
-        BitmapAjaxCallback.setMaxPixelLimit(2000000);
-        
-	}
-	protected void initM2base() {		
+	protected void init() {		
 
-		// m2base code
-		workExecutor = Executors.newCachedThreadPool();
-		handler = new Handler(Looper.getMainLooper());
-		backgroundHandlerThread = new HandlerThread("BandBackgroundHandlerThread");
-		backgroundHandlerThread.start();		
-		backgroundHandler = new Handler(backgroundHandlerThread.getLooper());
-		
 		
 		JsonWorker.init();
 		
 		logger.d("Application init completed.....");
 	}
-	public Handler getHandler() {
-		return handler;
-	}
-	
-	public Handler getBackgroundHandler() {
-		return backgroundHandler;
-	}
-	public void addWorker(Worker worker) {
-		if (worker == null) {
-			return;
-		}
-		workExecutor.execute((Runnable)worker);
-	}
 
-	public void addWorker(Runnable runnable) {
-		if (runnable == null) {
-			return;
-		}
-		workExecutor.execute(runnable);
-	}
-	
 	private void closeHttpClient(HttpClient client) {
 		ClientConnectionManager mgr = client.getConnectionManager();
 		mgr.closeExpiredConnections();
@@ -126,20 +83,7 @@ public abstract class AABaseApplication extends Application {
 	}
 	
 	protected void close() {
-		if (backgroundHandlerThread != null) {
-			try {
-				backgroundHandlerThread.quit();
-			} catch (Exception e) {
-			}
-			
-			backgroundHandlerThread = null;
-			backgroundHandler = null;
-		}
 		
-		if (workExecutor != null) {
-			workExecutor.shutdown();	
-		}		
-	
 		closeHttpClient(ApacheJsonWorker.getHttpClient());
 	}
 
@@ -178,6 +122,4 @@ public abstract class AABaseApplication extends Application {
 	public abstract String getUserAgent();
 	public abstract String getUserId();
 	public abstract String getFullAuthToken();
-	
-	
 }
