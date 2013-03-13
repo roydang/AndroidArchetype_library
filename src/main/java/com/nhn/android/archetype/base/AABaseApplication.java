@@ -21,10 +21,6 @@ import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Looper;
 
-import com.androidquery.callback.AjaxCallback;
-import com.androidquery.callback.BitmapAjaxCallback;
-import com.androidquery.util.AQUtility;
-import com.bugsense.trace.BugSenseHandler;
 import com.nhn.android.archetype.base.image.ImageCacheManager;
 import com.nhn.android.archetype.base.theme.ThemeHelper;
 import com.nhn.android.archetype.base.util.internal.M2baseLogger;
@@ -62,7 +58,7 @@ public abstract class AABaseApplication extends Application {
 		super.onCreate();
 		
 		initM2base();
-		initAquery();
+//		initAquery();
 	}
 
 	@Override
@@ -71,6 +67,7 @@ public abstract class AABaseApplication extends Application {
 		ImageCacheManager.clearMemoryCache();
 		super.onLowMemory();
 	}
+	/*
 	protected void initAquery() {		
 		
 		AQUtility.setContext(this);
@@ -80,10 +77,13 @@ public abstract class AABaseApplication extends Application {
         
         BitmapAjaxCallback.setIconCacheLimit(200);
         BitmapAjaxCallback.setCacheLimit(80);
-        BitmapAjaxCallback.setPixelLimit(400 * 400);
-        BitmapAjaxCallback.setMaxPixelLimit(2000000);
+//        BitmapAjaxCallback.setPixelLimit(400 * 400);
+        BitmapAjaxCallback.setPixelLimit(400 * 400 * 4);
+//        BitmapAjaxCallback.setMaxPixelLimit(2000000);
+        BitmapAjaxCallback.setMaxPixelLimit(2000000 * 5);
         
 	}
+	*/
 	protected void initM2base() {		
 
 		// m2base code

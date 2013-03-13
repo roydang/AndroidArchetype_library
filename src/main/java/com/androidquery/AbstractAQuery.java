@@ -25,6 +25,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.WeakHashMap;
 
+
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpHost;
 
@@ -82,6 +83,7 @@ import com.androidquery.util.AQUtility;
 import com.androidquery.util.Common;
 import com.androidquery.util.Constants;
 import com.androidquery.util.WebImage;
+import com.nhn.android.archetype.base.util.BaseLogger;
 
 
 /**
@@ -91,6 +93,8 @@ import com.androidquery.util.WebImage;
  */
 public abstract class AbstractAQuery<T extends AbstractAQuery<T>> implements Constants {
 
+	private static BaseLogger logger = BaseLogger.getLogger(AbstractAQuery.class);
+	
 	private View root;
 	private Activity act;
 	private Context context;
@@ -1803,14 +1807,15 @@ public abstract class AbstractAQuery<T extends AbstractAQuery<T>> implements Con
 	
 	
 	protected <K> T invoke(AbstractAjaxCallback<?, K> cb){
-				
 		
+				
 		cb.auth(ah);
 		cb.progress(progress);
 		cb.transformer(trans);
 		cb.policy(policy);
 		
 		if(proxy != null){
+			logger.d("invoke proxy name[%s] port[%s]", proxy.getHostName(), proxy.getPort());
 			cb.proxy(proxy.getHostName(), proxy.getPort());
 		}
 		

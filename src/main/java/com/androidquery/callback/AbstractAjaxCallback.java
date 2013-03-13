@@ -100,12 +100,16 @@ import com.androidquery.util.Constants;
 import com.androidquery.util.PredefinedBAOS;
 import com.androidquery.util.Progress;
 import com.androidquery.util.XmlDom;
+import com.nhn.android.archetype.base.util.BaseLogger;
+
 
 /**
  * The core class of ajax callback handler.
  *
  */
 public abstract class AbstractAjaxCallback<T, K> implements Runnable{
+	
+	private static BaseLogger logger = BaseLogger.getLogger(AbstractAjaxCallback.class);
 	
 	private static int NET_TIMEOUT = 30000;
 	private static String AGENT = null;
@@ -839,7 +843,7 @@ public abstract class AbstractAjaxCallback<T, K> implements Runnable{
 	}
 	
 	protected File accessFile(File cacheDir, String url){	
-		
+		logger.d("accessFile cacheDir[%s] expire[%s]", cacheDir.getAbsolutePath(), expire);
 		if(expire < 0) return null;
 		
 		File file = AQUtility.getExistedCacheByUrl(cacheDir, url);
@@ -964,7 +968,7 @@ public abstract class AbstractAjaxCallback<T, K> implements Runnable{
 	@Override
 	public void run() {
 		
-		
+		logger.d("ajax callback[%s], done[%s]", status, status.getDone());
 		if(!status.getDone()){
 			
 			try{			
@@ -993,17 +997,18 @@ public abstract class AbstractAjaxCallback<T, K> implements Runnable{
 	
 	private void backgroundWork(){
 	
+		logger.d("backgroundWork refresh[%s] fileCache[%s]", refresh, fileCache);
 		if(!refresh){
 		
 			if(fileCache){	
 				fileWork();			
 			}
 		}
-		
+		logger.d("backgroundWork1 refresh[%s] fileCache[%s]", refresh, fileCache);
 		if(result == null){
 			datastoreWork();			
 		}
-		
+		logger.d("backgroundWork2 refresh[%s] fileCache[%s]", refresh, fileCache);
 		if(result == null){
 			networkWork();
 		}
@@ -1036,7 +1041,7 @@ public abstract class AbstractAjaxCallback<T, K> implements Runnable{
 	private void fileWork(){
 		
 		File file = accessFile(cacheDir, getCacheUrl());
-		
+//		logger.d("fileWork filepath[%s]", file.getAbsolutePath());
 		//if file exist
 		if(file != null){
 			//convert
@@ -1221,6 +1226,7 @@ public abstract class AbstractAjaxCallback<T, K> implements Runnable{
 		
 		url = getNetworkUrl(url);
 		
+		logger.d("network() URL[%s] method[%s]", url, method);
 		
 		if(Constants.METHOD_DELETE == method){
 			httpDelete(url, headers, status);
